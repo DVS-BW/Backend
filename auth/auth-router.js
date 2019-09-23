@@ -15,10 +15,9 @@ const sessionConfig = {
     cookie: {
       maxAge: 1 * 24 * 60 * 60 * 1000,
       secure: false, // true means only over https
-      httpOnly: true, // true means no JS access
-      resave: false,
-      saveUninitialized: false
+      httpOnly: true // true means no JS access
     },
+    resave: true,
     saveUninitialized: true, // GDPR
     store: new KnexSessionStore({
       knex: dbConnection,
@@ -29,15 +28,15 @@ const sessionConfig = {
     })
   };
 
-  router.use(express.json());
-  router.use(session(sessionConfig));
+router.use(express.json());
+router.use(session(sessionConfig));
 
-  module.exports = router;
 
   router.post("/register", (req, res) => {
-    let { username, password } = req.body;
-    const hash = bcrypt.hashSync(password, 8);
-    Users.add({ username, password: hash })
+    let user = req.body;
+    const hash = bcrypt.hashSync(user.password, 8);
+    user.password = hash
+    Users.add(user)
       .then(saved => {
         res.status(201).json(saved);
       })
@@ -77,3 +76,5 @@ const sessionConfig = {
       res.status(200).json({ message: "Already logged out" });
     }
   });
+
+  module.exports = router;
