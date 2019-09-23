@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-
+const helmet = require('helmet');
 const authRouter = require('../auth/auth-router.js');
 const authenticate = require('../auth/authenticate-middleware.js');
 const calcRouter = require('../calc/calc-router.js');
 
+server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
