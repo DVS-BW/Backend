@@ -5,8 +5,8 @@ const Calc = require('./calc-model.js')
 module.exports = router;
 
 router.get("/", (req, res) => {
-    const { user_id } = req.body
-    Calc.findByUid(user_id)
+    const uid = req.body.user_id || req.session.user.id // allowing req.body only for the sake of demo.
+    Calc.findByUid(uid)
     .then(result => {
         res.status(200).json(result)
     })
