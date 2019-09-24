@@ -32,7 +32,6 @@ exports.up = function(knex) {
       .notNullable()
   })
   .createTable("expenses", tbl => {
-    tbl.increments();
     tbl
       .integer("input_id")
       .unsigned()
@@ -50,17 +49,17 @@ exports.up = function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
     tbl
-      .numeric("expense")
+      .integer("expense")
       .unsigned()
       .notNullable()
     tbl.primary(['input_id', 'user_id'])
-  }),
-
-};
+  })
+}
 
 exports.down = function(knex, Promise) {
   return knex.schema
   .dropTableIfExists("expenses")
+  .dropTableIfExists("inputs")
   .dropTableIfExists("categories")
   .dropTableIfExists("users");
 };
