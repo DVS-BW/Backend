@@ -16,7 +16,7 @@ module.exports = {
       conn.run('PRAGMA foreign_keys = ON', done);
       }
     }
-  }
+  },
   production: {
     client: 'sqlite3',
     useNullAsDefault: true,
