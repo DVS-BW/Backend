@@ -12,6 +12,6 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/auth', authRouter);
-server.use('/api/calc', calcRouter);
+server.use('/api/calc', authenticate, calcRouter);
 
 module.exports = server;

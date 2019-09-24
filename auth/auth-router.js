@@ -24,7 +24,7 @@ const sessionConfig = {
       tablename: "knexsessions",
       sidfieldname: "sessionid",
       createtable: true,
-      clearInterval: 1000 * 60
+      clearInterval: 60 * 60 * 1000, 
     })
   };
 
@@ -53,7 +53,7 @@ router.use(session(sessionConfig));
       .then(user => {
         if (user && bcrypt.compareSync(password, user.password)) {
           req.session.user = user;
-          res.status(200).json({ message: `Welcome ${user.username}!` }); // Ask FE what else they need in res object.
+          res.status(200).json(user); // Ask FE what else they need in res object.
         } else {
           res.status(401).json({ message: "Invalid credentials" });
         }
