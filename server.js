@@ -14,7 +14,7 @@ const KnexSessionStore = require("connect-session-knex")(session);
 
 const sessionConfig = {
     name: "snickerdoodle",
-    secret: process.env.SESSION_SECRET || "BW Secret",
+    secret: process.env.SESSION_SECRET,
     cookie: {
       maxAge: 1 * 24 * 60 * 60 * 1000,
       secure: false, // true means only over https
