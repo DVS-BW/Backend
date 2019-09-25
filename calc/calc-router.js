@@ -15,3 +15,13 @@ router.get("/", (req, res) => {
     })
   });
 
+  router.get("/test", (req, res) => {
+    Calc.initialize(req.body.user_id)
+    .then(result => {
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        res.status(500).json({ error: "NG" })
+    })
+  });
+

@@ -1,12 +1,14 @@
 const db = require("../data/dbConfig.js");
 
 module.exports = {
-  findByUid
+  findByUid,
+  initialize,
+  updateExpense
 };
 
-  function findByUid(id) {
+  function findByUid(uid) {
     return db('expenses')
-        .where({ user_id: id })
+        .where({ user_id: uid })
         .join('inputs', 'expenses.input_id', 'inputs.id')
         .join('categories', 'inputs.category_id', 'categories.id')
         .select('categories.category_name', 'inputs.input_name', 'expenses.expense')
@@ -23,4 +25,23 @@ module.exports = {
             })
             return formattedRes 
         })
+}
+
+function initialize(uid) {
+  const inputCount = 15;
+  const set = [];
+  for (i = 1; i <= inputCount; i++) {
+    set.push({  
+        "user_id" : uid, 
+        "input_id": i, 
+        "expense": 0 })
+      }
+
+  return db('expenses')  
+    .insert(set)
+    .then(res => findByUid(uid))
+  }
+
+function updateExpense(input, category) {
+  return input
 }

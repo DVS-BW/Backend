@@ -1,7 +1,7 @@
 exports.up = function(knex) {
   return knex.schema
   .createTable("users", users => {
-    users.increments();
+    users.increments().primary();;
     users
       .string("username", 255)
       .notNullable()
@@ -10,18 +10,17 @@ exports.up = function(knex) {
     users.boolean("admin").defaultTo(false);
   })
   .createTable("categories", tbl => {
-    tbl.increments();
+    tbl.increments().primary();;
     tbl
       .string("category_name", 255)
       .notNullable()
       .unique();
   })
   .createTable("inputs", tbl => {
-    tbl.increments();
-    tbl
+    tbl.increments().primary();
+        tbl
       .integer("category_id")
       .unsigned()
-      .notNullable()
       .references('id')
         .inTable('categories')
         .onDelete('CASCADE')
