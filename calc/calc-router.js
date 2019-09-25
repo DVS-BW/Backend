@@ -5,8 +5,7 @@ const Calc = require('./calc-model.js')
 module.exports = router;
 
 router.get("/", (req, res) => {
-    const uid = req.body.user_id || req.session.user.id // allowing req.body only for the sake of demo.
-    Calc.findByUid(uid)
+    Calc.find(req.body.user_id || req.session.user.id) // allowing req.body only for the sake of demo.
     .then(result => {
         res.status(200).json(result)
     })
@@ -15,13 +14,12 @@ router.get("/", (req, res) => {
     })
   });
 
-  router.get("/test", (req, res) => {
-    Calc.initialize(req.body.user_id)
+  router.put("/", (req, res) => {
+    Calc.find(req.body.user_id || req.session.user.id) // allowing req.body only for the sake of demo.
     .then(result => {
         res.status(200).json(result)
     })
     .catch(err => {
-        res.status(500).json({ error: "NG" })
+        res.status(500).json({ error: "The user information could not be retrieved." })
     })
   });
-
