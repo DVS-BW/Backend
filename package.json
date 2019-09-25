@@ -7,6 +7,9 @@
     "server": "nodemon index.js",
     "start": "node index.js"
   },
+  "engines": {
+    "node": ">=12.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DVS-BW/Backend.git"
@@ -27,6 +30,9 @@
     "express-session": "^1.16.2",
     "helmet": "^3.21.1",
     "knex": "^0.19.4",
+    "knex-cleaner": "^1.3.0",
+    "minipass": "^2.7.0",
+    "pg": "^7.12.1",
     "sqlite3": "^4.1.0"
   },
   "devDependencies": {
