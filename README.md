@@ -15,6 +15,6 @@
 {
     username: string,
     password: string,
-    admin: integer //defaults to 0, 1 for admin. OPTIONAL: included in case we had time to build a set of admin tools.
+    admin: boolean //defaults to 0. OPTIONAL: included this in case we wanted to define a set of admin tools.
 }
  ```

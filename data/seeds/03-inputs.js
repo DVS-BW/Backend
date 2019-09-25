@@ -12,6 +12,13 @@ exports.seed = function(knex) {
 
         {category_id: 3, input_name: "monthly_health"},
         {category_id: 3, input_name: "medication"},
-        {category_id: 3, input_name: "misc_health"}
+        {category_id: 3, input_name: "misc_health"},
+
+        {category_id: 4, input_name: "monthly_trans"},
+        {category_id: 4, input_name: "rent"},
+        {category_id: 4, input_name: "utilities"},
+        {category_id: 4, input_name: "moving"},
+
+        {category_id: 5, input_name: "monthly_debt"},
       ]);
 };
