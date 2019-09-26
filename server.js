@@ -33,7 +33,7 @@ const sessionConfig = {
 
 
 server.use(helmet());
-server.use(cors());
+server.use(cors({credentials: true, origin: ['localhost:3000', 'http://dvs.netlify.com' }));
 server.use(express.json());
 server.use(session(sessionConfig));
 
