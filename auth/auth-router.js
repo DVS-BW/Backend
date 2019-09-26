@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Users = require("./auth-model.js");
+const Calc = require("../calc/calc-model.js");
 
 const bcrypt = require("bcryptjs");
 
@@ -11,6 +12,7 @@ router.post("/register", (req, res) => {
     user.password = hash
     Users.add(user)
       .then(saved => {
+        Calc.initialize(saved.id)
         res.status(201).json(saved);
       })
       .catch(error => {
