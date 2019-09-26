@@ -28,3 +28,13 @@ router.put("/", (req, res) => {
         res.status(500).json({ error: "The user information could not be updated." })
     })
   });
+
+router.get("/test", (req, res) => {
+    Calc.get()
+    .then(result => {
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        res.status(500).json({ error: "The user information could not be retrieved." })
+    })
+  });

@@ -1,9 +1,14 @@
 const db = require("../data/dbConfig.js");
 
 module.exports = {
+  get,
   find,
   initialize,
   update
+}
+
+function get() {
+  return db('calc')
 }
 
 function find(user_id) {
@@ -14,7 +19,7 @@ function find(user_id) {
 }
 
 function initialize(user_id) {
-  const initialUserState = { user_id }
+  const initialUserState = { "user_id": user_id }
   return db('calc')
   .insert(initialUserState)
 }
