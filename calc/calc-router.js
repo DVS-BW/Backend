@@ -5,8 +5,7 @@ const Calc = require('./calc-model.js')
 module.exports = router;
 
 router.get("/", (req, res) => {
-    const user_id = req.body.user_id || req.session.user.id // allowing req.body only for the sake of demo.
-    Calc.find(user_id) 
+    Calc.find(req.session.user.id) 
     .then(result => {
         const objectified = JSON.parse(result.calc)
         res.status(200).json(objectified)
@@ -17,9 +16,8 @@ router.get("/", (req, res) => {
   });
 
 router.put("/", (req, res) => {
-    const calcString = JSON.stringify(req.body.calc)
-    console.log(calcString)
-    const uid = req.body.user_id || req.session.user.id // allowing req.body only for the sake of demo.
+    const calcString = JSON.stringify(req.body)
+    const uid = req.session.user.id
     Calc.update(uid, calcString)
     .then(result => {
         res.status(200).json({ message: "User information updated!" })

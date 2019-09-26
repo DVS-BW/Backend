@@ -15,7 +15,6 @@ function find(user_id) {
   return db('calc')
   .where({ user_id })
   .first()
-  .select("calc")
 }
 
 function initialize(user_id) {
