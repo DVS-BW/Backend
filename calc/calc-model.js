@@ -3,19 +3,26 @@ const db = require("../data/dbConfig.js");
 module.exports = {
   find,
   initialize,
+  update
 }
 
 function find(user_id) {
   return db('calc')
   .where({ user_id })
-  .first();
-
+  .first()
+  .select("calc")
 }
 
 function initialize(user_id) {
-  const initializedZero = { user_id }
+  const initialUserState = { user_id }
   return db('calc')
-  .insert(initializedZero)
+  .insert(initialUserState)
+}
+
+function update(user_id, update) {
+  return db('calc')
+  .where({ user_id })
+  .update({ "calc": update })
 }
 
  /*  
@@ -27,6 +34,8 @@ module.exports = {
   initialize,
   updateExpense
 };
+
+
  
  function findByUid(uid) {
     return db('expenses')
