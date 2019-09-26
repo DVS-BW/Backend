@@ -35,10 +35,10 @@ const sessionConfig = {
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
-//server.use(session(sessionConfig));
+server.use(session(sessionConfig));
 
 server.use('/api/auth', authRouter);
-//server.use('/api/calc', authenticate, calcRouter);
+server.use('/api/calc', authenticate, calcRouter);
 server.use('/api/calc', calcRouter);
 
 module.exports = server;
