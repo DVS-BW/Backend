@@ -39,6 +39,5 @@ server.use(session(sessionConfig));
 
 server.use('/api/auth', authRouter);
 server.use('/api/calc', authenticate, calcRouter);
-server.use('/api/calc', calcRouter);
 
 module.exports = server;
