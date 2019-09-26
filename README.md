@@ -9,6 +9,7 @@
  ------ | -------- | -----------
  POST | `api/auth/register` | Accepts `username`, `password`, and optional `admin` boolean, creates entries on the `users` and `calc` tables, and returns the user id, username, tokenized password, and admin status. Admin status defaults to 0/false; this was included in case we wanted to write some admin tools as stretch.
  POST | `api/auth/login` | Accepts `username` and `password` and returns the username and id. If username and passwords match, sets cookie and session to the logged-in user.
+ GET | `api/auth/logout` | Destroys session if exists.
 
  #### Accepted Register/Login Schema
  ```
@@ -70,3 +71,10 @@
     }
 }
  ```
+
+ ### ADMIN/TESTING
+
+ Method | Endpoint | Description 
+ ------ | -------- | -----------
+ GET | `api/calc/test` | Displays `calc` table containing all users.
+
