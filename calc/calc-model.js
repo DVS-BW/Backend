@@ -21,6 +21,7 @@ function initialize(user_id) {
   const initialUserState = { "user_id": user_id }
   return db('calc')
   .insert(initialUserState)
+  .then(res => console.log("initialized"))
 }
 
 function update(user_id, update) {
