@@ -6,7 +6,7 @@ module.exports = router;
 
 router.get("/", (req, res) => {
     console.log(req.user)
-    Calc.find(req.user.user_id) 
+    Calc.find(req.user.id) 
     .then(result => {
         const objectified = JSON.parse(result.calc)
         res.status(200).json(objectified)
@@ -17,13 +17,14 @@ router.get("/", (req, res) => {
   });
 
 router.put("/", (req, res) => {
-    const calcString = JSON.stringify(req.body.payload)
-    const uid = req.body.id
+    const calcString = JSON.stringify(req.body)
+    const uid = req.user.id
     Calc.update(uid, calcString)
     .then(result => {
         res.status(200).json({ message: "User information updated!" })
     })
     .catch(err => {
+        console.log(err)
         res.status(500).json({ error: "The user information could not be updated." })
     })
   });

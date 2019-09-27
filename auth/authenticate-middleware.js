@@ -1,14 +1,16 @@
 const jwt = require('jsonwebtoken')
+const secrets = require('../secrets.js');
+
 
 module.exports = (req, res, next) => {
     const token = req.headers.authorization;
       if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+        jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
           if (err) {
             res.status(401).json({ message: 'Invalid Credentials' });
           } else {
             console.log(decodedToken)
-            req.user = { username: decodedToken.username, user_id: decodedToken.subject }
+            req.user = { username: decodedToken.username, id: decodedToken.subject }
             next()
           }
         })

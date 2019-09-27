@@ -6,6 +6,8 @@ const Calc = require("../calc/calc-model.js");
 
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
+const secrets = require('../secrets.js');
+
 
 router.post("/register", (req, res) => {
     let user = req.body;
@@ -36,7 +38,7 @@ router.post("/register", (req, res) => {
           res.status(200).json(resFE) */
           console.log("passwords match")
           const token = generateToken(user)
-          res.status(200).json({ token, user })
+          res.status(200).json({ "token" : token, "user": user })
         } else {
           res.status(401).json({ message: "Invalid credentials" });
         }
@@ -64,15 +66,14 @@ router.post("/register", (req, res) => {
   function generateToken(user) {
     const payload = {
       subject: user.id,
-      username: user.username,
-      password: user.password
+      username: user.username
     };
   
     const options = {
       expiresIn: '1d', 
     };
   
-    return jwt.sign(payload, process.env.JWT_SECRET, options);
+    return jwt.sign(payload, secrets.jwtSecret, options);
   }
 
   module.exports = router;
