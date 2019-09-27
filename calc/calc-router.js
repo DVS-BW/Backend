@@ -17,8 +17,8 @@ router.get("/", (req, res) => {
   });
 
 router.put("/", (req, res) => {
-    const calcString = JSON.stringify(req.body)
-    const uid = req.user.user_id
+    const calcString = JSON.stringify(req.body.payload)
+    const uid = req.body.id
     Calc.update(uid, calcString)
     .then(result => {
         res.status(200).json({ message: "User information updated!" })
