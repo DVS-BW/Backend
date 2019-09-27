@@ -36,7 +36,7 @@ router.post("/register", (req, res) => {
           res.status(200).json(resFE) */
           console.log("passwords match")
           const token = generateToken(user)
-          res.status(200).json({token})
+          res.status(200).json({ token, user })
         } else {
           res.status(401).json({ message: "Invalid credentials" });
         }
@@ -72,7 +72,7 @@ router.post("/register", (req, res) => {
       expiresIn: '1d', 
     };
   
-    return jwt.sign(payload, process.env.JWT_SECRET || "test", options);
+    return jwt.sign(payload, process.env.JWT_SECRET, options);
   }
 
   module.exports = router;
