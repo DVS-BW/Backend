@@ -3,15 +3,15 @@ exports.up = function(knex) {
     .createTable("users", users => {
       users.increments().primary();
       users
-        .string("username", 255)
+        .string("username")
         .notNullable()
         .unique();
-      users.string("password", 255).notNullable();
+      users.string("password").notNullable();
       users.boolean("admin").defaultTo(false);
     })
     .createTable("calc", tbl => {
       tbl.increments().primary();
-      tbl.string("calc")
+      tbl.text("calc")
       tbl
         .integer("user_id")
         .unique()
